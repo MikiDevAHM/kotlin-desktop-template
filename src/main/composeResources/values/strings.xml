@@ -1,0 +1,18 @@
+<resources>
+  <string name="app_title">Kotlin Desktop Template</string>
+  <string name="welcome">Welcome</string>
+  <string name="welcome_subtitle">Compose Desktop on Skiko with its own window frame.</string>
+  <string name="version_label">Version %1$s</string>
+  <string name="language_label">Language</string>
+  <string name="updates_label">Updates</string>
+  <string name="check_updates">Check for updates</string>
+  <string name="checking">Checking GitHub Releases…</string>
+  <string name="up_to_date">You are on the latest version.</string>
+  <string name="update_available">Version %1$s is available.</string>
+  <string name="download_update">Download</string>
+  <string name="open_release_page">Open release page</string>
+  <string name="downloading">Downloading… %1$s</string>
+  <string name="install_restart">Install and quit</string>
+  <string name="update_failed">Update failed: %1$s</string>
+  <string name="retry">Retry</string>
+</resources>

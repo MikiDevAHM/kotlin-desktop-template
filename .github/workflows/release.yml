@@ -1,0 +1,79 @@
+# Builds installers on every OS and publishes them as a GitHub Release when a version tag is pushed.
+# Enabled in projects created from this template (NOT in the template repository itself).
+# To enable: remove the leading "# " from every line of this file.
+#
+# How the auto-updater finds your installers:
+#   - it reads the latest GitHub Release of github.owner/github.repo (see gradle.properties)
+#   - it picks the asset by extension (.msi/.exe, .dmg/.pkg, .deb/.rpm) and by an architecture token in
+#     the file name (x64 / arm64), which is why the "Collect" step below prefixes every file with a label.
+#
+# Release flow:  git tag v1.2.0 && git push origin v1.2.0
+#
+# name: Release
+#
+# on:
+#   push:
+#     tags: ["v*"]
+#
+# permissions:
+#   contents: write
+#
+# jobs:
+#   package:
+#     name: Package (${{ matrix.label }})
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         include:
+#           - { os: windows-latest, label: windows-x64 }
+#           - { os: macos-latest, label: macos-arm64 }
+#           - { os: macos-15-intel, label: macos-x64 }
+#           - { os: ubuntu-latest, label: linux-x64 }
+#     steps:
+#       - uses: actions/checkout@v4
+#
+#       - uses: actions/setup-java@v4
+#         with:
+#           distribution: temurin
+#           java-version: 21
+#
+#       - uses: gradle/actions/setup-gradle@v4
+#
+#       - name: Package release installers
+#         shell: bash
+#         # The tag (v1.2.0) becomes the app version, overriding app.version in gradle.properties.
+#         run: ./gradlew packageReleaseDistributionForCurrentOS -Papp.version="${GITHUB_REF_NAME#v}" --no-daemon
+#
+#       - name: Collect installers
+#         shell: bash
+#         run: |
+#           mkdir -p dist
+#           for file in build/compose/binaries/main-release/*/*; do
+#             [ -f "$file" ] && cp "$file" "dist/${{ matrix.label }}-$(basename "$file")"
+#           done
+#           ls -la dist
+#
+#       - uses: actions/upload-artifact@v4
+#         with:
+#           name: installers-${{ matrix.label }}
+#           path: dist/*
+#           if-no-files-found: error
+#
+#   publish:
+#     name: Publish GitHub Release
+#     needs: package
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/download-artifact@v4
+#         with:
+#           pattern: installers-*
+#           path: dist
+#           merge-multiple: true
+#
+#       - uses: softprops/action-gh-release@v2
+#         with:
+#           files: dist/*
+#           generate_release_notes: true
+#           # Tags like v1.2.0-rc.1 are published as pre-releases, the updater ignores them by default.
+#           prerelease: ${{ contains(github.ref_name, '-') }}

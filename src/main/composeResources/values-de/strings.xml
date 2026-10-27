@@ -1,0 +1,18 @@
+<resources>
+  <string name="app_title">Kotlin-Desktop-Vorlage</string>
+  <string name="welcome">Willkommen</string>
+  <string name="welcome_subtitle">Compose Desktop auf Skiko mit eigenem Fensterrahmen.</string>
+  <string name="version_label">Version %1$s</string>
+  <string name="language_label">Sprache</string>
+  <string name="updates_label">Updates</string>
+  <string name="check_updates">Nach Updates suchen</string>
+  <string name="checking">GitHub Releases werden geprüft…</string>
+  <string name="up_to_date">Du verwendest die neueste Version.</string>
+  <string name="update_available">Version %1$s ist verfügbar.</string>
+  <string name="download_update">Herunterladen</string>
+  <string name="open_release_page">Release-Seite öffnen</string>
+  <string name="downloading">Wird heruntergeladen… %1$s</string>
+  <string name="install_restart">Installieren und beenden</string>
+  <string name="update_failed">Update fehlgeschlagen: %1$s</string>
+  <string name="retry">Erneut versuchen</string>
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+  <string name="app_title">Template Kotlin Desktop</string>
+  <string name="welcome">Bem-vindo</string>
+  <string name="welcome_subtitle">Compose Desktop sobre Skiko com moldura de janela própria.</string>
+  <string name="version_label">Versão %1$s</string>
+  <string name="language_label">Idioma</string>
+  <string name="updates_label">Atualizações</string>
+  <string name="check_updates">Verificar atualizações</string>
+  <string name="checking">Verificando os Releases do GitHub…</string>
+  <string name="up_to_date">Você está na versão mais recente.</string>
+  <string name="update_available">A versão %1$s está disponível.</string>
+  <string name="download_update">Baixar</string>
+  <string name="open_release_page">Abrir página do release</string>
+  <string name="downloading">Baixando… %1$s</string>
+  <string name="install_restart">Instalar e fechar</string>
+  <string name="update_failed">Falha na atualização: %1$s</string>
+  <string name="retry">Tentar novamente</string>
+</resources>

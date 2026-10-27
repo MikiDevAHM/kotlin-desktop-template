@@ -1,0 +1,13 @@
+# Keeps Gradle dependencies (including gradle/libs.versions.toml) and GitHub Actions up to date.
+# Enabled in projects created from this template. To enable: remove the leading "# " from every line.
+#
+# version: 2
+# updates:
+#   - package-ecosystem: gradle
+#     directory: /
+#     schedule:
+#       interval: weekly
+#   - package-ecosystem: github-actions
+#     directory: /
+#     schedule:
+#       interval: weekly
