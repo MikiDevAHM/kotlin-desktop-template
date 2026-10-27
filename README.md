@@ -75,10 +75,9 @@ Drawing the title bar yourself means the OS no longer provides some behaviours:
 - Installer size is mostly the bundled runtime. Expect tens of megabytes.
 - `jpackage` rejects `0.x.y` versions for `.dmg`/`.pkg`, so the template starts at `1.0.0`.
 
-## Optional: Lucide icons
+## Lucide icons
 
-All [Lucide](https://lucide.dev) icons as a font, drawn with Skia. Nothing else in the template depends on it,
-so you can delete it (see below) if you do not need icons.
+All [Lucide](https://lucide.dev) icons as a font, drawn with Skia.
 
 ```kotlin
 LucideIcon(Lucide.Settings)                                                  // 16.dp, theme text color
