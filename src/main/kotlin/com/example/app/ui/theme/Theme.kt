@@ -1,15 +1,12 @@
 package com.example.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Immutable
@@ -32,6 +29,14 @@ data class AppTypography(
     val title: TextStyle,
     val body: TextStyle,
     val caption: TextStyle,
+)
+
+@Immutable
+data class AppSpacing(
+    val small: Dp = 8.dp,
+    val medium: Dp = 16.dp,
+    val large: Dp = 24.dp,
+    val extraLarge: Dp = 32.dp,
 )
 
 private val DarkColors = AppColors(
@@ -63,8 +68,17 @@ private val LightColors = AppColors(
 )
 
 private val LocalColors = staticCompositionLocalOf { DarkColors }
+
 private val LocalTypography = staticCompositionLocalOf {
-    AppTypography(TextStyle.Default, TextStyle.Default, TextStyle.Default)
+    AppTypography(
+        TextStyle.Default,
+        TextStyle.Default,
+        TextStyle.Default,
+    )
+}
+
+private val LocalSpacing = staticCompositionLocalOf {
+    AppSpacing()
 }
 
 object AppTheme {
@@ -73,6 +87,9 @@ object AppTheme {
 
     val typography: AppTypography
         @Composable @ReadOnlyComposable get() = LocalTypography.current
+
+    val spacing: AppSpacing
+        @Composable @ReadOnlyComposable get() = LocalSpacing.current
 }
 
 @Composable
@@ -81,16 +98,31 @@ fun AppTheme(
     content: @Composable () -> Unit,
 ) {
     val colors = if (darkTheme) DarkColors else LightColors
+
     val typography = remember(colors) {
         AppTypography(
-            title = TextStyle(color = colors.onSurface, fontSize = 24.sp, fontWeight = FontWeight.SemiBold),
-            body = TextStyle(color = colors.onSurface, fontSize = 14.sp),
-            caption = TextStyle(color = colors.onSurfaceMuted, fontSize = 12.sp),
+            title = TextStyle(
+                color = colors.onSurface,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.SemiBold,
+            ),
+            body = TextStyle(
+                color = colors.onSurface,
+                fontSize = 14.sp,
+            ),
+            caption = TextStyle(
+                color = colors.onSurfaceMuted,
+                fontSize = 12.sp,
+            ),
         )
     }
+
+    val spacing = remember { AppSpacing() }
+
     CompositionLocalProvider(
         LocalColors provides colors,
         LocalTypography provides typography,
+        LocalSpacing provides spacing,
         content = content,
     )
 }

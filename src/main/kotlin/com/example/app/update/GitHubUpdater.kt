@@ -1,6 +1,14 @@
 package com.example.app.update
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -10,14 +18,6 @@ import java.nio.file.Path
 import java.security.MessageDigest
 import java.time.Duration
 import kotlin.coroutines.cancellation.CancellationException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 
 private val log = KotlinLogging.logger {}
 
@@ -115,6 +115,7 @@ class GitHubUpdater(
             } else {
                 json.decodeFromString<GitHubRelease>(response.body())
             }
+
             404 -> null
             403, 429 -> error("GitHub API rate limit reached, try again later")
             else -> error("GitHub API returned HTTP $status")

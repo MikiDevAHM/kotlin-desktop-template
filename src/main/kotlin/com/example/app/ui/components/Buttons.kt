@@ -52,3 +52,57 @@ fun AppButton(
             .padding(horizontal = 16.dp, vertical = 8.dp),
     )
 }
+
+@Composable
+fun AppToggleButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    primary: Boolean = true,
+    checked: Boolean = false,
+) {
+    val colors = AppTheme.colors
+    val source = remember { MutableInteractionSource() }
+    val hovered by source.collectIsHoveredAsState()
+    val shape = RoundedCornerShape(8.dp)
+
+    val background = when {
+        checked -> colors.accent
+        hovered -> colors.hover
+        else -> colors.surface
+    }
+
+    val textColor = if (checked) colors.onAccent else colors.onSurface
+
+    BasicText(
+        text = text,
+        style = AppTheme.typography.body.copy(color = textColor),
+        modifier = modifier
+            .alpha(
+                if (enabled) {
+                    if (hovered && checked) 0.88f else 1f
+                } else {
+                    0.4f
+                }
+            )
+            .clip(shape)
+            .background(background)
+            .then(
+                if (primary || checked) {
+                    Modifier
+                } else {
+                    Modifier.border(1.dp, colors.border, shape)
+                }
+            )
+            .hoverable(source)
+            .pointerHoverIcon(PointerIcon.Hand)
+            .clickable(
+                interactionSource = source,
+                indication = null,
+                enabled = enabled,
+                onClick = onClick,
+            )
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+    )
+}

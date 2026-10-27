@@ -1,4 +1,4 @@
-package com.example.app.ui.components
+package com.example.app.ui.components.shapes
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.skiaCanvas
 import org.jetbrains.skia.*
 
 @Composable
-fun SkiaGradient(colors: List<Color>, modifier: Modifier = Modifier) {
+fun AppGradient(colors: List<Color>, modifier: Modifier = Modifier) {
     val gradient = Gradient(
         colors = Gradient.Colors(
             colors.map { Color4f(it.red, it.green, it.blue, it.alpha) }.toTypedArray(),

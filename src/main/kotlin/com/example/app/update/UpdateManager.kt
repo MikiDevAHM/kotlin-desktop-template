@@ -1,14 +1,14 @@
 package com.example.app.update
 
 import com.example.app.AppInfo
-import java.nio.file.Path
-import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.nio.file.Path
+import kotlin.coroutines.cancellation.CancellationException
 
 sealed interface UpdateState {
     data object Idle : UpdateState

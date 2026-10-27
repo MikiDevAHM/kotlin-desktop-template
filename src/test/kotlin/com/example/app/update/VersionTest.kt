@@ -8,9 +8,9 @@ import kotlin.test.assertTrue
 class VersionTest {
     @Test
     fun parsesPlainAndPrefixedVersions() {
-        assertEquals(Version(1, 2, 3), Version.parseOrNull("1.2.3"))
-        assertEquals(Version(1, 2, 3), Version.parseOrNull("v1.2.3"))
-        assertEquals(Version(1, 2, 3, "beta.1"), Version.parseOrNull("v1.2.3-beta.1+build.5"))
+        assertEquals(Version.parseOrNull("1.2.3"), Version(1, 2, 3))
+        assertEquals(Version.parseOrNull("v1.2.3"), Version(1, 2, 3))
+        assertEquals(Version.parseOrNull("v1.2.3-beta.1+build.5"), Version(1, 2, 3, "beta.1"))
     }
 
     @Test

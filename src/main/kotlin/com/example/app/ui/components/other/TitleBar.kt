@@ -1,24 +1,10 @@
-package com.example.app.ui.components
+package com.example.app.ui.components.other
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.window.WindowDraggableArea
@@ -46,6 +32,7 @@ import com.example.app.update.OsFamily
 import java.awt.Frame
 import java.awt.Rectangle
 import java.awt.Toolkit
+import java.awt.Window
 
 val TitleBarHeight = 36.dp
 
@@ -136,7 +123,7 @@ private fun WindowScope.toggleMaximize(state: WindowState) {
     state.placement = WindowPlacement.Maximized
 }
 
-private fun usableScreenBounds(window: java.awt.Window): Rectangle {
+private fun usableScreenBounds(window: Window): Rectangle {
     val configuration = window.graphicsConfiguration
     val bounds = configuration.bounds
     val insets = Toolkit.getDefaultToolkit().getScreenInsets(configuration)

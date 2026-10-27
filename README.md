@@ -4,7 +4,7 @@ A starting point for desktop apps in Kotlin with their own window frame (no OS t
 through Skiko. No embedded browser: Compose Desktop draws everything on a Skia canvas.
 
 - Kotlin 2.4 on JDK 21, Gradle 9.8 (Kotlin DSL) and a version catalog (`gradle/libs.versions.toml`)
-- Compose Multiplatform Desktop 1.12 (Skiko is its renderer, the Skia API is also available directly, see `SkiaGradient.kt`)
+- Compose Multiplatform Desktop 1.12 (Skiko is its renderer, the Skia API is also available directly, see `Gradient.kt`)
 - Undecorated window with a `TitleBar` component: drag, double-click to maximize, minimize/maximize/close, edge resize
 - Auto-update from GitHub Releases, written on the JDK `HttpClient` and kotlinx.serialization (no extra HTTP library)
 - i18n with Compose resources (`en`, `pt`, `de` as examples) and a persisted language choice

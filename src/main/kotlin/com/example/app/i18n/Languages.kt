@@ -1,7 +1,7 @@
 package com.example.app.i18n
 
 import com.example.app.settings.AppSettings
-import java.util.Locale
+import java.util.*
 
 object Languages {
     val supported: List<Locale> = listOf(

@@ -1,7 +1,7 @@
 package com.example.app
 
 import com.example.app.update.Version
-import java.util.Properties
+import java.util.*
 
 object AppInfo {
     private val properties = Properties().apply {

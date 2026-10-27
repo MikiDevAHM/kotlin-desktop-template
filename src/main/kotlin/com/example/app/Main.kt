@@ -4,13 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
@@ -24,13 +18,13 @@ import com.example.app.generated.resources.app_icon
 import com.example.app.generated.resources.app_title
 import com.example.app.i18n.Languages
 import com.example.app.ui.App
-import com.example.app.ui.components.TitleBar
+import com.example.app.ui.components.other.TitleBar
 import com.example.app.ui.theme.AppTheme
 import com.example.app.update.UpdateManager
-import java.awt.Dimension
-import java.util.Locale
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import java.awt.Dimension
+import java.util.*
 
 fun main() {
     Languages.restore()

@@ -15,4 +15,7 @@
   <string name="install_restart">Instalar e fechar</string>
   <string name="update_failed">Falha na atualização: %1$s</string>
   <string name="retry">Tentar novamente</string>
+  <string name="about_page">Sobre</string>
+  <string name="home_page">Inicio</string>
+  <string name="settings_page">Configurações</string>
 </resources>
