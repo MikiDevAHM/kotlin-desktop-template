@@ -28,8 +28,6 @@ fun HomePage() {
             res(str.welcome_subtitle),
             style = AppTheme.typography.body,
         )
-
-
     }
 }
 

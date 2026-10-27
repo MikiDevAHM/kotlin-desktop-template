@@ -27,6 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowScope
 import androidx.compose.ui.window.WindowState
+import com.example.app.ui.icons.Lucide
+import com.example.app.ui.icons.LucideGlyph
+import com.example.app.ui.icons.LucideIcon
 import com.example.app.ui.theme.AppTheme
 import com.example.app.update.OsFamily
 import java.awt.Frame
@@ -157,6 +160,23 @@ private fun WindowControls(
         }
         return
     }
+
+    Row(Modifier.fillMaxHeight()) {
+        LucideControlButton(onMinimize) { color ->
+            LucideIcon(Lucide.Minus, tint = color)
+        }
+
+        if (resizable) {
+            LucideControlButton(onToggleMaximize) { color ->
+                if (maximized) LucideIcon(Lucide.Minimize2,tint = color) else LucideIcon(Lucide.Maximize2,tint = color)
+            }
+        }
+        LucideControlButton(onClose, hoverBackground = colors.danger, hoverGlyph = Color.White) { color ->
+            LucideIcon(Lucide.X, tint = color)
+        }
+    }
+
+    /** Without Lucide
     Row(Modifier.fillMaxHeight()) {
         ControlButton(onMinimize) { color ->
             val y = size.height / 2
@@ -173,6 +193,7 @@ private fun WindowControls(
             drawLine(color, Offset(size.width, 0f), Offset(0f, size.height), strokeWidth = stroke)
         }
     }
+    */
 }
 
 @Composable
@@ -196,6 +217,30 @@ private fun ControlButton(
         contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.size(10.dp)) { glyph(glyphColor) }
+    }
+}
+
+@Composable
+private fun LucideControlButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    hoverBackground: Color = AppTheme.colors.hover,
+    hoverGlyph: Color = AppTheme.colors.onSurface,
+    content: @Composable (Color) -> Unit,
+) {
+    val source = remember { MutableInteractionSource() }
+    val hovered by source.collectIsHoveredAsState()
+    val glyphColor = if (hovered) hoverGlyph else AppTheme.colors.onSurfaceMuted
+    Box(
+        modifier = modifier
+            .width(46.dp)
+            .fillMaxHeight()
+            .background(if (hovered) hoverBackground else Color.Transparent)
+            .hoverable(source)
+            .clickable(interactionSource = source, indication = null, onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        content(glyphColor)
     }
 }
 

@@ -75,6 +75,44 @@ Drawing the title bar yourself means the OS no longer provides some behaviours:
 - Installer size is mostly the bundled runtime. Expect tens of megabytes.
 - `jpackage` rejects `0.x.y` versions for `.dmg`/`.pkg`, so the template starts at `1.0.0`.
 
+## Optional: Lucide icons
+
+All [Lucide](https://lucide.dev) icons as a font, drawn with Skia. Nothing else in the template depends on it,
+so you can delete it (see below) if you do not need icons.
+
+```kotlin
+LucideIcon(Lucide.Settings)                                                  // 16.dp, theme text color
+LucideIcon(Lucide.FolderOpen, size = 24.dp, tint = AppTheme.colors.accent, contentDescription = "Open")
+LucideIcon(Lucide.byName("arrow-up-right") ?: Lucide.CircleHelp)             // by kebab-case name at runtime
+BasicText(Lucide.Heart.text, style = TextStyle(fontFamily = LucideFont.family, fontSize = 18.sp))
+```
+
+How it works: `lucide.ttf` has a 1000 unit em square with the baseline at the bottom edge, and every icon sits on
+Lucide's 24x24 grid inside it. `LucideIcon` loads the TTF into a Skia `Typeface` once and draws the icon's code
+point with `Canvas.drawString`, placing the baseline at the bottom of the icon box. No font metrics are involved,
+so the result is identical on every OS. Prefer `LucideIcon` over `Text` with the font family, which adds line
+height and can shift the glyph.
+
+Files:
+
+```
+scripts/generate-lucide.groovy                 installs the font and generates the mapping
+src/main/resources/fonts/lucide.ttf            the icon font
+src/main/resources/fonts/lucide-codepoints.json  name -> code point (also contains renamed/alias names)
+src/main/resources/licenses/lucide.txt         ISC + MIT notices, they must ship with the font
+src/main/kotlin/.../ui/icons/Lucide.kt         generated: one typed constant per icon (Lucide.ArrowDown, ...)
+src/main/kotlin/.../ui/icons/Lucide*.kt        LucideGlyph, LucideFont, LucideIcon, lookup, gallery
+```
+
+- `groovy scripts/generate-lucide.groovy` downloads the newest `lucide-static` from npm (needs `npm` and `tar`),
+  `--version 1.62.0` pins a release, `--lucide-dir <path>` uses an unpacked copy. Rerun it to update the icons.
+  The Kotlin package defaults to `<app.group>.ui.icons`, override it with `--package`.
+- Constant names are the kebab-case name in PascalCase (`folder-open` -> `FolderOpen`). Aliases of renamed icons
+  are included, so old names keep working. Icons that Lucide removed from the font (brand logos such as GitHub)
+  are skipped by the script.
+- `LucideGallery.kt` has a `main()` with a searchable grid of every icon: run it from the IDE to browse names.
+- To remove it: delete `ui/icons/`, `scripts/generate-lucide.groovy` and the three resource files above.
+
 ## Alternatives worth knowing
 
 - [Nucleus](https://github.com/kdroidfilter/Nucleus): Gradle plugin and runtime libraries for Compose Desktop
