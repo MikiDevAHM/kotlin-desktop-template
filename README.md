@@ -34,24 +34,6 @@ to produce all of them.
 5. `settings.gradle.kts`: change `rootProject.name`.
 6. Enable the workflows: remove the leading `# ` from the lines in `.github/workflows/*.yml` and `.github/dependabot.yml`.
 
-## Layout
-
-```
-build.gradle.kts, settings.gradle.kts, gradle.properties, gradle/libs.versions.toml
-packaging/                         icons used by jpackage
-src/main/composeResources/         strings (values, values-pt, values-de) and drawables
-src/main/kotlin/com/example/app/
-  Main.kt                          application and the single example window
-  AppInfo.kt                       name/version/repo read from app.properties (filled in by Gradle)
-  ui/App.kt                        example screen
-  ui/theme/Theme.kt                colors, typography, light/dark
-  ui/components/TitleBar.kt        custom window decoration
-  ui/components/Button.kt          small example component
-  ui/components/SkiaGradient.kt    drawing with the Skia API directly
-  update/                          GitHub Releases updater
-  i18n/, settings/                 language handling and persisted preferences
-```
-
 ## Auto-update
 
 `GitHubUpdater` calls `GET /repos/{owner}/{repo}/releases/latest`, compares the tag (`v1.2.0`) with the running
